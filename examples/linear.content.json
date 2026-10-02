@@ -1,0 +1,104 @@
+{
+  "protocol_version": "1.0-draft.1",
+  "runtime_profile": "visual_novel_v1",
+  "required_capabilities": [
+    "single_image"
+  ],
+  "drama": {
+    "key": "mist_station",
+    "title": "雾站来信",
+    "logline": "末班车前，你决定是否相信带着旧信的陌生人。",
+    "synopsis": "你在雾站遇见林雾，决定一起核对来信还是独自确认。两条路线最终在月台汇合，根据建立的信任决定共同启程或平静告别。",
+    "style_bible": "克制的写实插画，雨夜暖灯与蓝灰雾气，角色服装在同一夜保持一致。",
+    "start_episode": "ep_arrival",
+    "chapter_order": [
+      "ch_station"
+    ],
+    "asset_refs": []
+  },
+  "chapters": {
+    "ch_station": {
+      "title": "候车",
+      "summary": "等待并登车。",
+      "episode_order": [
+        "ep_arrival"
+      ],
+      "asset_refs": [
+        "station_bg"
+      ]
+    }
+  },
+  "episodes": {
+    "ep_arrival": {
+      "title": "末班车",
+      "synopsis": "等待并登车。",
+      "unit_order": [
+        "u_1_1"
+      ],
+      "asset_refs": [],
+      "exit": {
+        "mode": "ending",
+        "target": {
+          "type": "ending",
+          "key": "end_depart"
+        }
+      }
+    }
+  },
+  "units": {
+    "u_1_1": {
+      "title": "画面1",
+      "intent": "交代动作与情绪，避免引用玩家未经历的支线。",
+      "scene_description": "候车厅的灯照着一封旧信。",
+      "type": "single_image",
+      "primary_asset": "station_bg",
+      "character_layers": [],
+      "bgm": {
+        "action": "stop"
+      },
+      "dialogue_order": [
+        "d_1_1"
+      ],
+      "advance_mode": "click",
+      "on_enter": []
+    }
+  },
+  "dialogues": {
+    "d_1_1": {
+      "speaker_type": "narrator",
+      "speaker_label": "旁白",
+      "text": "候车厅的灯照着一封旧信。"
+    }
+  },
+  "characters": {},
+  "states": {},
+  "rule_sets": {},
+  "endings": {
+    "end_depart": {
+      "title": "启程",
+      "description": "你乘上末班车。"
+    }
+  },
+  "asset_specs": {
+    "station_bg": {
+      "name": "雨夜候车厅",
+      "media_type": "image",
+      "usage": "background",
+      "description": "雨夜候车厅",
+      "owner": {
+        "kind": "chapter",
+        "key": "ch_station"
+      },
+      "production_mode": "create",
+      "reason": "供关联单元复用；人物姿态保持角色一致。",
+      "prompt": "无人候车厅，窗外雨夜，蓝灰雾气，暖灯，纵向写实插画。",
+      "references": [],
+      "specifications": {
+        "width": 720,
+        "height": 1280,
+        "transparent": false
+      }
+    }
+  },
+  "asset_bindings": {}
+}

@@ -1,0 +1,1078 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Interactive drama authoring 1.0-draft.1",
+  "type": "object",
+  "properties": {
+    "protocol_version": {
+      "enum": [
+        "1.0-draft.1"
+      ]
+    },
+    "runtime_profile": {
+      "enum": [
+        "visual_novel_v1"
+      ]
+    },
+    "required_capabilities": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "single_image",
+          "layered_scene",
+          "episode_choices",
+          "state_rules",
+          "bgm",
+          "voice",
+          "unit_effects"
+        ]
+      },
+      "minItems": 1,
+      "maxItems": 10000,
+      "uniqueItems": true
+    },
+    "drama": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 20000
+        },
+        "logline": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 20000
+        },
+        "synopsis": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 20000
+        },
+        "style_bible": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 20000
+        },
+        "start_episode": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$"
+        },
+        "chapter_order": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,63}$"
+          },
+          "minItems": 1,
+          "maxItems": 10000,
+          "uniqueItems": true
+        },
+        "asset_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,63}$"
+          },
+          "minItems": 0,
+          "maxItems": 10000,
+          "uniqueItems": true
+        },
+        "cover_asset": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$"
+        }
+      },
+      "required": [
+        "key",
+        "title",
+        "logline",
+        "synopsis",
+        "style_bible",
+        "start_episode",
+        "chapter_order",
+        "asset_refs"
+      ],
+      "additionalProperties": false
+    },
+    "chapters": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]{0,63}$"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/chapter"
+      },
+      "maxProperties": 10000
+    },
+    "episodes": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]{0,63}$"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/episode"
+      },
+      "maxProperties": 10000
+    },
+    "units": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]{0,63}$"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/unit"
+      },
+      "maxProperties": 10000
+    },
+    "dialogues": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]{0,63}$"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/dialogue"
+      },
+      "maxProperties": 10000
+    },
+    "characters": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]{0,63}$"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/character"
+      },
+      "maxProperties": 10000
+    },
+    "states": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]{0,63}$"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/state"
+      },
+      "maxProperties": 10000
+    },
+    "rule_sets": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]{0,63}$"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/rule_set"
+      },
+      "maxProperties": 10000
+    },
+    "endings": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]{0,63}$"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/ending"
+      },
+      "maxProperties": 10000
+    },
+    "asset_specs": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]{0,63}$"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/asset_spec"
+      },
+      "maxProperties": 10000
+    },
+    "asset_bindings": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]{0,63}$"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/asset_binding"
+      },
+      "maxProperties": 10000
+    }
+  },
+  "required": [
+    "protocol_version",
+    "runtime_profile",
+    "required_capabilities",
+    "drama",
+    "chapters",
+    "episodes",
+    "units",
+    "dialogues",
+    "characters",
+    "states",
+    "rule_sets",
+    "endings",
+    "asset_specs",
+    "asset_bindings"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "target": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "episode",
+            "ending",
+            "rule_set"
+          ]
+        },
+        "key": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$"
+        }
+      },
+      "required": [
+        "type",
+        "key"
+      ],
+      "additionalProperties": false
+    },
+    "terminal_target": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "episode",
+            "ending"
+          ]
+        },
+        "key": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$"
+        }
+      },
+      "required": [
+        "type",
+        "key"
+      ],
+      "additionalProperties": false
+    },
+    "effect": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$"
+        },
+        "op": {
+          "enum": [
+            "add",
+            "set"
+          ]
+        },
+        "value": {
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": -1000000,
+              "maximum": 1000000
+            },
+            {
+              "type": "boolean"
+            }
+          ]
+        }
+      },
+      "required": [
+        "state",
+        "op",
+        "value"
+      ],
+      "additionalProperties": false
+    },
+    "condition": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$"
+        },
+        "op": {
+          "enum": [
+            "eq",
+            "ne",
+            "gt",
+            "gte",
+            "lt",
+            "lte"
+          ]
+        },
+        "value": {
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": -1000000,
+              "maximum": 1000000
+            },
+            {
+              "type": "boolean"
+            }
+          ]
+        }
+      },
+      "required": [
+        "state",
+        "op",
+        "value"
+      ],
+      "additionalProperties": false
+    },
+    "option": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 20000
+        },
+        "effects": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/effect"
+          },
+          "minItems": 0,
+          "maxItems": 10000
+        },
+        "target": {
+          "$ref": "#/$defs/target"
+        }
+      },
+      "required": [
+        "key",
+        "label",
+        "effects",
+        "target"
+      ],
+      "additionalProperties": false
+    },
+    "exit": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "mode": {
+              "enum": [
+                "sequence"
+              ]
+            }
+          },
+          "required": [
+            "mode"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "mode": {
+              "enum": [
+                "episode",
+                "ending",
+                "rules"
+              ]
+            },
+            "target": {
+              "$ref": "#/$defs/target"
+            }
+          },
+          "required": [
+            "mode",
+            "target"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "mode": {
+              "enum": [
+                "choice"
+              ]
+            },
+            "options": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/option"
+              },
+              "minItems": 2,
+              "maxItems": 4
+            }
+          },
+          "required": [
+            "mode",
+            "options"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "state": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "enum": [
+                "integer"
+              ]
+            },
+            "initial": {
+              "type": "integer",
+              "minimum": -1000000,
+              "maximum": 1000000
+            },
+            "min": {
+              "type": "integer",
+              "minimum": -1000000,
+              "maximum": 1000000
+            },
+            "max": {
+              "type": "integer",
+              "minimum": -1000000,
+              "maximum": 1000000
+            }
+          },
+          "required": [
+            "type",
+            "initial",
+            "min",
+            "max"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "enum": [
+                "boolean"
+              ]
+            },
+            "initial": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "type",
+            "initial"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "rule": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$"
+        },
+        "priority": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "match": {
+          "enum": [
+            "all",
+            "any"
+          ]
+        },
+        "conditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/condition"
+          },
+          "minItems": 1,
+          "maxItems": 10000
+        },
+        "target": {
+          "$ref": "#/$defs/terminal_target"
+        }
+      },
+      "required": [
+        "key",
+        "priority",
+        "match",
+        "conditions",
+        "target"
+      ],
+      "additionalProperties": false
+    },
+    "rule_set": {
+      "type": "object",
+      "properties": {
+        "rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/rule"
+          },
+          "minItems": 0,
+          "maxItems": 10000
+        },
+        "default": {
+          "$ref": "#/$defs/terminal_target"
+        }
+      },
+      "required": [
+        "rules",
+        "default"
+      ],
+      "additionalProperties": false
+    },
+    "chapter": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 20000
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 20000
+        },
+        "episode_order": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,63}$"
+          },
+          "minItems": 1,
+          "maxItems": 10000,
+          "uniqueItems": true
+        },
+        "asset_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,63}$"
+          },
+          "minItems": 0,
+          "maxItems": 10000,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "title",
+        "summary",
+        "episode_order",
+        "asset_refs"
+      ],
+      "additionalProperties": false
+    },
+    "episode": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 20000
+        },
+        "synopsis": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 20000
+        },
+        "unit_order": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,63}$"
+          },
+          "minItems": 1,
+          "maxItems": 10000,
+          "uniqueItems": true
+        },
+        "asset_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,63}$"
+          },
+          "minItems": 0,
+          "maxItems": 10000,
+          "uniqueItems": true
+        },
+        "exit": {
+          "$ref": "#/$defs/exit"
+        }
+      },
+      "required": [
+        "title",
+        "synopsis",
+        "unit_order",
+        "asset_refs",
+        "exit"
+      ],
+      "additionalProperties": false
+    },
+    "layer": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "enum": [
+            "left",
+            "right"
+          ]
+        },
+        "character": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$"
+        },
+        "pose": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$"
+        }
+      },
+      "required": [
+        "slot",
+        "character",
+        "pose"
+      ],
+      "additionalProperties": false
+    },
+    "bgm": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "action": {
+              "enum": [
+                "keep",
+                "stop"
+              ]
+            }
+          },
+          "required": [
+            "action"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "action": {
+              "enum": [
+                "play"
+              ]
+            },
+            "asset": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9_]{0,63}$"
+            }
+          },
+          "required": [
+            "action",
+            "asset"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "unit": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 20000
+        },
+        "intent": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 20000
+        },
+        "scene_description": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 20000
+        },
+        "type": {
+          "enum": [
+            "single_image",
+            "layered_scene"
+          ]
+        },
+        "primary_asset": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$"
+        },
+        "character_layers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/layer"
+          },
+          "minItems": 0,
+          "maxItems": 2
+        },
+        "bgm": {
+          "$ref": "#/$defs/bgm"
+        },
+        "dialogue_order": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,63}$"
+          },
+          "minItems": 0,
+          "maxItems": 10000,
+          "uniqueItems": true
+        },
+        "advance_mode": {
+          "enum": [
+            "click"
+          ]
+        },
+        "on_enter": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/effect"
+          },
+          "minItems": 0,
+          "maxItems": 10000
+        }
+      },
+      "required": [
+        "title",
+        "intent",
+        "scene_description",
+        "type",
+        "primary_asset",
+        "character_layers",
+        "bgm",
+        "dialogue_order",
+        "advance_mode",
+        "on_enter"
+      ],
+      "additionalProperties": false
+    },
+    "dialogue": {
+      "type": "object",
+      "properties": {
+        "speaker_type": {
+          "enum": [
+            "character",
+            "narrator",
+            "custom"
+          ]
+        },
+        "speaker_label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 20000
+        },
+        "character": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$"
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 20000
+        },
+        "voice_asset": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$"
+        }
+      },
+      "required": [
+        "speaker_type",
+        "speaker_label",
+        "text"
+      ],
+      "additionalProperties": false
+    },
+    "pose": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 20000
+        },
+        "asset": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$"
+        }
+      },
+      "required": [
+        "name",
+        "asset"
+      ],
+      "additionalProperties": false
+    },
+    "character": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 20000
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 20000
+        },
+        "portrait_asset": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$"
+        },
+        "voice_profile": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$"
+        },
+        "poses": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,63}$"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/pose"
+          },
+          "maxProperties": 10000
+        }
+      },
+      "required": [
+        "name",
+        "description",
+        "portrait_asset",
+        "poses"
+      ],
+      "additionalProperties": false
+    },
+    "owner": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "enum": [
+            "drama",
+            "chapter",
+            "episode",
+            "unit"
+          ]
+        },
+        "key": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$"
+        }
+      },
+      "required": [
+        "kind",
+        "key"
+      ],
+      "additionalProperties": false
+    },
+    "specifications": {
+      "type": "object",
+      "properties": {
+        "width": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        },
+        "transparent": {
+          "type": "boolean"
+        },
+        "duration_seconds": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 3600
+        },
+        "loop": {
+          "type": "boolean"
+        },
+        "spoken_text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 20000
+        },
+        "emotion": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 20000
+        },
+        "speed": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 4
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "asset_spec": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 20000
+        },
+        "media_type": {
+          "enum": [
+            "image",
+            "audio",
+            "voice_profile"
+          ]
+        },
+        "usage": {
+          "enum": [
+            "portrait",
+            "pose",
+            "background",
+            "scene",
+            "prop",
+            "voice",
+            "bgm",
+            "voice_profile"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 20000
+        },
+        "owner": {
+          "$ref": "#/$defs/owner"
+        },
+        "production_mode": {
+          "enum": [
+            "create",
+            "derive",
+            "reuse",
+            "upload"
+          ]
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 20000
+        },
+        "prompt": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 20000
+        },
+        "negative_prompt": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 20000
+        },
+        "references": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,63}$"
+          },
+          "minItems": 0,
+          "maxItems": 10000,
+          "uniqueItems": true
+        },
+        "specifications": {
+          "$ref": "#/$defs/specifications"
+        }
+      },
+      "required": [
+        "name",
+        "media_type",
+        "usage",
+        "description",
+        "owner",
+        "production_mode",
+        "reason",
+        "references",
+        "specifications"
+      ],
+      "additionalProperties": false
+    },
+    "asset_binding": {
+      "type": "object",
+      "properties": {
+        "artifact_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 20000
+        },
+        "content_hash": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "mime_type": {
+          "type": "string",
+          "pattern": "^(image|audio|application)/[a-zA-Z0-9.+-]+$"
+        }
+      },
+      "required": [
+        "artifact_id",
+        "content_hash",
+        "mime_type"
+      ],
+      "additionalProperties": false
+    },
+    "ending": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 20000
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 20000
+        },
+        "image_asset": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$"
+        },
+        "voice_asset": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$"
+        },
+        "bgm_asset": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$"
+        }
+      },
+      "required": [
+        "title",
+        "description"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

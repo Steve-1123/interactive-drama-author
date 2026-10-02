@@ -1,0 +1,4 @@
+interface:
+  display_name: "互动剧协议创作"
+  short_description: "将故事按章集单元预算改编为互动剧协议，规划素材并执行离线校验"
+  default_prompt: "使用 $interactive-drama-author 将我的故事按指定章集单元数量改编为互动剧草稿，规划素材 prompt，并实际运行离线校验。"
