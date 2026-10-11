@@ -1,0 +1,204 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Generation request 1.0",
+  "type": "object",
+  "properties": {
+    "request_version": {
+      "enum": [
+        "1.0"
+      ]
+    },
+    "protocol_version": {
+      "enum": [
+        "1.0-draft.1"
+      ]
+    },
+    "runtime_profile": {
+      "enum": [
+        "visual_novel_v1"
+      ]
+    },
+    "brief": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 20000
+    },
+    "language": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 20000
+    },
+    "adaptation": {
+      "type": "object",
+      "properties": {
+        "must_preserve": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 20000
+          },
+          "minItems": 0,
+          "maxItems": 10000
+        },
+        "allowed_changes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 20000
+          },
+          "minItems": 0,
+          "maxItems": 10000
+        }
+      },
+      "required": [
+        "must_preserve",
+        "allowed_changes"
+      ],
+      "additionalProperties": false
+    },
+    "length": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "enum": [
+            "exact"
+          ]
+        },
+        "chapter_count": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        },
+        "default_episodes_per_chapter": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        },
+        "default_units_per_episode": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        },
+        "chapter_overrides": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "chapter_index": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 10000
+              },
+              "episode_count": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 10000
+              }
+            },
+            "required": [
+              "chapter_index",
+              "episode_count"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 0,
+          "maxItems": 10000
+        },
+        "episode_overrides": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "chapter_index": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 10000
+              },
+              "episode_index": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 10000
+              },
+              "unit_count": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 10000
+              }
+            },
+            "required": [
+              "chapter_index",
+              "episode_index",
+              "unit_count"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 0,
+          "maxItems": 10000
+        }
+      },
+      "required": [
+        "mode",
+        "chapter_count",
+        "default_episodes_per_chapter",
+        "default_units_per_episode",
+        "chapter_overrides",
+        "episode_overrides"
+      ],
+      "additionalProperties": false
+    },
+    "branch_budget": {
+      "type": "object",
+      "properties": {
+        "max_choice_episodes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10000
+        },
+        "ending_count": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        },
+        "max_state_variables": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 30
+        }
+      },
+      "required": [
+        "max_choice_episodes",
+        "ending_count",
+        "max_state_variables"
+      ],
+      "additionalProperties": false
+    },
+    "asset_budget": {
+      "type": "object",
+      "properties": {
+        "max_new_specs": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10000
+        }
+      },
+      "required": [
+        "max_new_specs"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "request_version",
+    "protocol_version",
+    "runtime_profile",
+    "brief",
+    "language",
+    "adaptation",
+    "length",
+    "branch_budget",
+    "asset_budget"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,472 @@
+{
+  "protocol_version": "1.0-draft.1",
+  "runtime_profile": "visual_novel_v1",
+  "required_capabilities": [
+    "single_image",
+    "layered_scene",
+    "episode_choices",
+    "state_rules",
+    "unit_effects"
+  ],
+  "drama": {
+    "key": "mist_station",
+    "title": "雾站来信",
+    "logline": "末班车前，你决定是否相信带着旧信的陌生人。",
+    "synopsis": "你在雾站遇见林雾，决定一起核对来信还是独自确认。两条路线最终在月台汇合，根据建立的信任决定共同启程或平静告别。",
+    "style_bible": "克制的写实插画，雨夜暖灯与蓝灰雾气，角色服装在同一夜保持一致。",
+    "start_episode": "ep_arrival",
+    "chapter_order": [
+      "ch_station",
+      "ch_platform"
+    ],
+    "asset_refs": [
+      "lin_portrait"
+    ]
+  },
+  "chapters": {
+    "ch_station": {
+      "title": "来信",
+      "summary": "在候车厅相遇，选择共同核对或各自查证。",
+      "episode_order": [
+        "ep_arrival",
+        "ep_together"
+      ],
+      "asset_refs": [
+        "station_bg"
+      ]
+    },
+    "ch_platform": {
+      "title": "月台",
+      "summary": "不同选择汇合至月台，根据此前建立的信任告别或同行。",
+      "episode_order": [
+        "ep_alone",
+        "ep_platform"
+      ],
+      "asset_refs": [
+        "platform_bg"
+      ]
+    }
+  },
+  "episodes": {
+    "ep_arrival": {
+      "title": "候车厅",
+      "synopsis": "候车厅的灯照着一封旧信。；林雾邀请你一起核对信上的车次。",
+      "unit_order": [
+        "u_1_1",
+        "u_1_2"
+      ],
+      "asset_refs": [],
+      "exit": {
+        "mode": "choice",
+        "options": [
+          {
+            "key": "opt_together",
+            "label": "一起核对",
+            "effects": [
+              {
+                "state": "trust",
+                "op": "add",
+                "value": 1
+              },
+              {
+                "state": "together",
+                "op": "set",
+                "value": true
+              }
+            ],
+            "target": {
+              "type": "episode",
+              "key": "ep_together"
+            }
+          },
+          {
+            "key": "opt_alone",
+            "label": "独自查证",
+            "effects": [],
+            "target": {
+              "type": "episode",
+              "key": "ep_alone"
+            }
+          }
+        ]
+      }
+    },
+    "ep_together": {
+      "title": "共同查证",
+      "synopsis": "你和林雾一起找到值班员。；信息核对无误，你更愿意相信她。",
+      "unit_order": [
+        "u_2_1",
+        "u_2_2"
+      ],
+      "asset_refs": [],
+      "exit": {
+        "mode": "episode",
+        "target": {
+          "type": "episode",
+          "key": "ep_platform"
+        }
+      }
+    },
+    "ep_alone": {
+      "title": "独自查证",
+      "synopsis": "你独自查看车站公告。；确认车次后，你沿指示前往月台。",
+      "unit_order": [
+        "u_3_1",
+        "u_3_2"
+      ],
+      "asset_refs": [],
+      "exit": {
+        "mode": "sequence"
+      }
+    },
+    "ep_platform": {
+      "title": "末班月台",
+      "synopsis": "广播响起，你在月台再次遇见林雾。；列车停稳，你们准备作出最后的道别。",
+      "unit_order": [
+        "u_4_1",
+        "u_4_2"
+      ],
+      "asset_refs": [],
+      "exit": {
+        "mode": "rules",
+        "target": {
+          "type": "rule_set",
+          "key": "route_depart"
+        }
+      }
+    }
+  },
+  "units": {
+    "u_1_1": {
+      "title": "画面1",
+      "intent": "交代动作与情绪，避免引用玩家未经历的支线。",
+      "scene_description": "候车厅的灯照着一封旧信。",
+      "type": "single_image",
+      "primary_asset": "station_bg",
+      "character_layers": [],
+      "bgm": {
+        "action": "stop"
+      },
+      "dialogue_order": [
+        "d_1_1"
+      ],
+      "advance_mode": "click",
+      "on_enter": []
+    },
+    "u_1_2": {
+      "title": "画面2",
+      "intent": "交代动作与情绪，避免引用玩家未经历的支线。",
+      "scene_description": "林雾邀请你一起核对信上的车次。",
+      "type": "layered_scene",
+      "primary_asset": "station_bg",
+      "character_layers": [
+        {
+          "slot": "right",
+          "character": "lin",
+          "pose": "calm"
+        }
+      ],
+      "bgm": {
+        "action": "stop"
+      },
+      "dialogue_order": [
+        "d_1_2"
+      ],
+      "advance_mode": "click",
+      "on_enter": []
+    },
+    "u_2_1": {
+      "title": "画面1",
+      "intent": "交代动作与情绪，避免引用玩家未经历的支线。",
+      "scene_description": "你和林雾一起找到值班员。",
+      "type": "single_image",
+      "primary_asset": "station_bg",
+      "character_layers": [],
+      "bgm": {
+        "action": "stop"
+      },
+      "dialogue_order": [
+        "d_2_1"
+      ],
+      "advance_mode": "click",
+      "on_enter": []
+    },
+    "u_2_2": {
+      "title": "画面2",
+      "intent": "交代动作与情绪，避免引用玩家未经历的支线。",
+      "scene_description": "信息核对无误，你更愿意相信她。",
+      "type": "single_image",
+      "primary_asset": "station_bg",
+      "character_layers": [],
+      "bgm": {
+        "action": "stop"
+      },
+      "dialogue_order": [
+        "d_2_2"
+      ],
+      "advance_mode": "click",
+      "on_enter": [
+        {
+          "state": "trust",
+          "op": "add",
+          "value": 1
+        }
+      ]
+    },
+    "u_3_1": {
+      "title": "画面1",
+      "intent": "交代动作与情绪，避免引用玩家未经历的支线。",
+      "scene_description": "你独自查看车站公告。",
+      "type": "single_image",
+      "primary_asset": "platform_bg",
+      "character_layers": [],
+      "bgm": {
+        "action": "stop"
+      },
+      "dialogue_order": [
+        "d_3_1"
+      ],
+      "advance_mode": "click",
+      "on_enter": []
+    },
+    "u_3_2": {
+      "title": "画面2",
+      "intent": "交代动作与情绪，避免引用玩家未经历的支线。",
+      "scene_description": "确认车次后，你沿指示前往月台。",
+      "type": "single_image",
+      "primary_asset": "platform_bg",
+      "character_layers": [],
+      "bgm": {
+        "action": "stop"
+      },
+      "dialogue_order": [
+        "d_3_2"
+      ],
+      "advance_mode": "click",
+      "on_enter": []
+    },
+    "u_4_1": {
+      "title": "画面1",
+      "intent": "交代动作与情绪，避免引用玩家未经历的支线。",
+      "scene_description": "广播响起，你在月台再次遇见林雾。",
+      "type": "single_image",
+      "primary_asset": "platform_bg",
+      "character_layers": [],
+      "bgm": {
+        "action": "stop"
+      },
+      "dialogue_order": [
+        "d_4_1"
+      ],
+      "advance_mode": "click",
+      "on_enter": []
+    },
+    "u_4_2": {
+      "title": "画面2",
+      "intent": "交代动作与情绪，避免引用玩家未经历的支线。",
+      "scene_description": "列车停稳，你们准备作出最后的道别。",
+      "type": "single_image",
+      "primary_asset": "platform_bg",
+      "character_layers": [],
+      "bgm": {
+        "action": "stop"
+      },
+      "dialogue_order": [
+        "d_4_2"
+      ],
+      "advance_mode": "click",
+      "on_enter": []
+    }
+  },
+  "dialogues": {
+    "d_1_1": {
+      "speaker_type": "narrator",
+      "speaker_label": "旁白",
+      "text": "候车厅的灯照着一封旧信。"
+    },
+    "d_1_2": {
+      "speaker_type": "narrator",
+      "speaker_label": "旁白",
+      "text": "林雾邀请你一起核对信上的车次。"
+    },
+    "d_2_1": {
+      "speaker_type": "narrator",
+      "speaker_label": "旁白",
+      "text": "你和林雾一起找到值班员。"
+    },
+    "d_2_2": {
+      "speaker_type": "narrator",
+      "speaker_label": "旁白",
+      "text": "信息核对无误，你更愿意相信她。"
+    },
+    "d_3_1": {
+      "speaker_type": "narrator",
+      "speaker_label": "旁白",
+      "text": "你独自查看车站公告。"
+    },
+    "d_3_2": {
+      "speaker_type": "narrator",
+      "speaker_label": "旁白",
+      "text": "确认车次后，你沿指示前往月台。"
+    },
+    "d_4_1": {
+      "speaker_type": "narrator",
+      "speaker_label": "旁白",
+      "text": "广播响起，你在月台再次遇见林雾。"
+    },
+    "d_4_2": {
+      "speaker_type": "narrator",
+      "speaker_label": "旁白",
+      "text": "列车停稳，你们准备作出最后的道别。"
+    }
+  },
+  "characters": {
+    "lin": {
+      "name": "林雾",
+      "description": "成年旅人，深绿色风衣，短黑发，表达克制。",
+      "portrait_asset": "lin_portrait",
+      "poses": {
+        "calm": {
+          "name": "平静",
+          "asset": "lin_calm"
+        }
+      }
+    }
+  },
+  "states": {
+    "trust": {
+      "type": "integer",
+      "initial": 0,
+      "min": 0,
+      "max": 3
+    },
+    "together": {
+      "type": "boolean",
+      "initial": false
+    }
+  },
+  "rule_sets": {
+    "route_depart": {
+      "rules": [
+        {
+          "key": "rule_trust",
+          "priority": 10,
+          "match": "all",
+          "conditions": [
+            {
+              "state": "trust",
+              "op": "gte",
+              "value": 2
+            },
+            {
+              "state": "together",
+              "op": "eq",
+              "value": true
+            }
+          ],
+          "target": {
+            "type": "ending",
+            "key": "end_depart"
+          }
+        }
+      ],
+      "default": {
+        "type": "ending",
+        "key": "end_farewell"
+      }
+    }
+  },
+  "endings": {
+    "end_depart": {
+      "title": "一同启程",
+      "description": "核对信件后，你们带着共同确认的目的地登车。"
+    },
+    "end_farewell": {
+      "title": "各自归途",
+      "description": "你确认自己的行程，与林雾礼貌道别。"
+    }
+  },
+  "asset_specs": {
+    "lin_portrait": {
+      "name": "林雾定妆",
+      "media_type": "image",
+      "usage": "portrait",
+      "description": "林雾定妆",
+      "owner": {
+        "kind": "drama",
+        "key": "mist_station"
+      },
+      "production_mode": "create",
+      "reason": "供关联单元复用；人物姿态保持角色一致。",
+      "prompt": "成年女性，深绿风衣，短黑发，正面定妆照，写实插画，柔和灯光。",
+      "references": [],
+      "specifications": {
+        "width": 720,
+        "height": 1280,
+        "transparent": false
+      }
+    },
+    "lin_calm": {
+      "name": "林雾平静立绘",
+      "media_type": "image",
+      "usage": "pose",
+      "description": "林雾平静立绘",
+      "owner": {
+        "kind": "drama",
+        "key": "mist_station"
+      },
+      "production_mode": "derive",
+      "reason": "供关联单元复用；人物姿态保持角色一致。",
+      "prompt": "使用林雾定妆参考，保持五官与服装，平静站立，透明背景。",
+      "references": [
+        "lin_portrait"
+      ],
+      "specifications": {
+        "width": 720,
+        "height": 1280,
+        "transparent": true
+      }
+    },
+    "station_bg": {
+      "name": "雨夜候车厅",
+      "media_type": "image",
+      "usage": "background",
+      "description": "雨夜候车厅",
+      "owner": {
+        "kind": "chapter",
+        "key": "ch_station"
+      },
+      "production_mode": "create",
+      "reason": "供关联单元复用；人物姿态保持角色一致。",
+      "prompt": "无人候车厅，窗外雨夜，蓝灰雾气，暖灯，纵向写实插画。",
+      "references": [],
+      "specifications": {
+        "width": 720,
+        "height": 1280,
+        "transparent": false
+      }
+    },
+    "platform_bg": {
+      "name": "雨夜月台",
+      "media_type": "image",
+      "usage": "background",
+      "description": "雨夜月台",
+      "owner": {
+        "kind": "chapter",
+        "key": "ch_platform"
+      },
+      "production_mode": "derive",
+      "reason": "供关联单元复用；人物姿态保持角色一致。",
+      "prompt": "沿用车站的材质与灯光，雨夜空月台，纵向写实插画，无人物。",
+      "references": [
+        "station_bg"
+      ],
+      "specifications": {
+        "width": 720,
+        "height": 1280,
+        "transparent": false
+      }
+    }
+  },
+  "asset_bindings": {}
+}

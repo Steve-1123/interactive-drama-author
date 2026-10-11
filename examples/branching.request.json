@@ -1,0 +1,33 @@
+{
+  "request_version": "1.0",
+  "protocol_version": "1.0-draft.1",
+  "runtime_profile": "visual_novel_v1",
+  "brief": "改编雾站来信：陌生人在雨夜邀请你共同核对旧信上的车次，最后在月台决定同行或告别。",
+  "language": "zh-CN",
+  "adaptation": {
+    "must_preserve": [
+      "雨夜车站",
+      "确认车次后再作决定"
+    ],
+    "allowed_changes": [
+      "增加独自查证支线",
+      "增加两种结局"
+    ]
+  },
+  "length": {
+    "mode": "exact",
+    "chapter_count": 2,
+    "default_episodes_per_chapter": 2,
+    "default_units_per_episode": 2,
+    "chapter_overrides": [],
+    "episode_overrides": []
+  },
+  "branch_budget": {
+    "max_choice_episodes": 1,
+    "ending_count": 2,
+    "max_state_variables": 2
+  },
+  "asset_budget": {
+    "max_new_specs": 4
+  }
+}
