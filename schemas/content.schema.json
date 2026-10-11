@@ -928,6 +928,26 @@
           "type": "number",
           "exclusiveMinimum": 0,
           "maximum": 4
+        },
+        "sample_rate": {
+          "enum": [
+            8000,
+            16000,
+            24000,
+            32000,
+            44100,
+            48000
+          ]
+        },
+        "loudness_rate": {
+          "type": "integer",
+          "minimum": -50,
+          "maximum": 100
+        },
+        "pitch_rate": {
+          "type": "integer",
+          "minimum": -12,
+          "maximum": 12
         }
       },
       "required": [],

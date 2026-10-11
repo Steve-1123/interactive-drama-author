@@ -109,5 +109,11 @@ class ValidationTests(unittest.TestCase):
     def test_voice_mismatch(self):
         self.d['dialogues']['d_1_1']['voice_asset']='station_bg'
         self.check('ASSET_TYPE')
+    def test_current_audio_parameters(self):
+        specs=self.d['asset_specs']['station_bg']['specifications']
+        specs.update(sample_rate=24000,loudness_rate=0,pitch_rate=0)
+        self.assertTrue(v.validate(self.d,self.r)['valid'])
+        specs['sample_rate']=22050
+        self.check('SCHEMA')
 
 if __name__=='__main__':unittest.main()
